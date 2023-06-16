@@ -19,7 +19,7 @@ export const getEvents = async (req, res) => {
       response = await Events.findAll({
         attributes: ["uuid", "name", "price", "promotor", "lokasi", "tanggal"],
         where: {
-          id: req.session.userId,
+          userId: req.session.me,
         },
         include: [
           {

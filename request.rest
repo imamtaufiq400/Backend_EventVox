@@ -79,7 +79,7 @@ POST http://localhost:5000/events
 Content-Type: application/json
 
 {
-    "name": "Event Konser Kangenband kaliwungu",
+    "name": "Event Konser Kangenband 123 kaliwungu",
     "price": "200000",
     "promotor": "YangMauMauAja",
     "lokasi": "surabaya",
