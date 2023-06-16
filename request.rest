@@ -1,0 +1,106 @@
+// Create User
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "Makmum",
+    "email": "makmum@gmail.com",
+    "password": "123456",
+    "confPassword": "123456",
+    "role": "user"
+}
+
+
+###
+// get All Users
+GET http://localhost:5000/users
+
+###
+// Get single User
+GET http://localhost:5000/users/c749b3b0-c7d5-4c20-ac0b-4cc363da9cb3
+###
+// Update User
+PATCH  http://localhost:5000/users/c749b3b0-c7d5-4c20-ac0b-4cc363da9cb3
+Content-Type: application/json
+
+{
+    "name": "Makmum versi dua",
+    "email": "makmum@gmail.com",
+    "password": "",
+    "confPassword": "",
+    "role": "user"
+}
+
+###
+// delete a user
+DELETE http://localhost:5000/users/cc113b1c-5073-4f3f-9cd4-8be3c4d63be0
+
+###
+// Login User
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "123456"
+    
+}
+
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "makmum@gmail.com",
+    "password": "123456"
+    
+}
+
+###
+// Me
+GET http://localhost:5000/me
+
+###
+// Logout User
+DELETE  http://localhost:5000/logout
+
+###
+// Get All Products
+GET http://localhost:5000/events
+
+###
+// Get Single Products
+GET http://localhost:5000/events/f1532fe1-7db1-4f63-8f84-7d65cce80542
+
+
+###
+// POST Data Product
+POST http://localhost:5000/events
+Content-Type: application/json
+
+{
+    "name": "Event Konser Kangenband kaliwungu",
+    "price": "200000",
+    "promotor": "YangMauMauAja",
+    "lokasi": "surabaya",
+    "tanggal": "20-10-2024"
+    
+}
+
+###
+// Update Data Product
+PATCH http://localhost:5000/events/7cc40917-b8a3-407a-aa65-2689c20129ce
+Content-Type: application/json
+
+{
+    "name": "Event Konser ColdPlay 123",
+    "price": "300000",
+    "promotor": "YangMahaKuasa",
+    "lokasi": "Batam, Kepulauan Riau",
+    "tanggal": "20-05-2023"
+    
+}
+
+###
+// delete a product
+DELETE http://localhost:5000/events/1b84ffc9-8256-4549-b330-93579f5e4014
