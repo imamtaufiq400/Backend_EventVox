@@ -4,7 +4,7 @@ import argon2, { hash } from "argon2";
 export const getUsers = async (req, res) => {
   try {
     const response = await User.findAll({
-      attributes: ["uuid", "name", "email", "role"],
+      attributes: ["uuid", "name", "username", "email", "role"],
     });
     res.status(200).json(response);
   } catch (error) {
@@ -15,7 +15,7 @@ export const getUsers = async (req, res) => {
 export const getUsersById = async (req, res) => {
   try {
     const response = await User.findOne({
-      attributes: ["uuid", "name", "email", "role"],
+      attributes: ["uuid", "name", "username", "email", "role"],
       where: {
         uuid: req.params.id,
       },
@@ -27,7 +27,7 @@ export const getUsersById = async (req, res) => {
 };
 
 export const createUsers = async (req, res) => {
-  const { name, email, password, confPassword, role } = req.body;
+  const { name, username, email, password, confPassword, role } = req.body;
   if (password !== confPassword)
     return res
       .status(400)
@@ -36,6 +36,7 @@ export const createUsers = async (req, res) => {
   try {
     await User.create({
       name: name,
+      username: username,
       email: email,
       password: hashPassword,
       role: role,
@@ -53,7 +54,7 @@ export const updateUsers = async (req, res) => {
     },
   });
   if (!user) return res.status(404).json({ msg: "User tidak ditemukan" });
-  const { name, email, password, confPassword, role } = req.body;
+  const { name, username, email, password, confPassword, role } = req.body;
   let hashPassword;
   if (password === "" || password === null) {
     hashPassword = user.password;
@@ -68,6 +69,7 @@ export const updateUsers = async (req, res) => {
     await User.update(
       {
         name: name,
+        username: username,
         email: email,
         password: hashPassword,
         role: role,

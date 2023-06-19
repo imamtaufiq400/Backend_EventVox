@@ -22,6 +22,14 @@ const User = db.define(
         len: [3, 100],
       },
     },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        len: [3, 100],
+      },
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,

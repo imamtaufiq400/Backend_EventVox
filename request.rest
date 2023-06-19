@@ -3,8 +3,9 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "name": "Makmum",
-    "email": "makmum@gmail.com",
+    "nama_lengkap": "fathur rohman",
+    "username": "fathur",
+    "email": "fathurrohman123@gmail.com",
     "password": "123456",
     "confPassword": "123456",
     "role": "user"
@@ -51,7 +52,7 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "email": "makmum@gmail.com",
+    "email": "fathurrohman123@gmail.com",
     "password": "123456"
     
 }
@@ -65,30 +66,30 @@ GET http://localhost:5000/me
 DELETE  http://localhost:5000/logout
 
 ###
-// Get All Products
+// Get All Events
 GET http://localhost:5000/events
 
 ###
-// Get Single Products
+// Get Single Events
 GET http://localhost:5000/events/f1532fe1-7db1-4f63-8f84-7d65cce80542
 
 
 ###
-// POST Data Product
+// POST Data Events
 POST http://localhost:5000/events
 Content-Type: application/json
 
 {
-    "name": "Event Konser Kangenband 123 kaliwungu",
-    "price": "200000",
+    "name": "Event Konser alditaher",
+    "price": "15000",
     "promotor": "YangMauMauAja",
-    "lokasi": "surabaya",
-    "tanggal": "20-10-2024"
+    "lokasi": "bandung",
+    "tanggal": "21-12-2024"
     
 }
 
 ###
-// Update Data Product
+// Update Data Events
 PATCH http://localhost:5000/events/7cc40917-b8a3-407a-aa65-2689c20129ce
 Content-Type: application/json
 
@@ -102,5 +103,48 @@ Content-Type: application/json
 }
 
 ###
-// delete a product
+// delete a Events
 DELETE http://localhost:5000/events/1b84ffc9-8256-4549-b330-93579f5e4014
+
+
+###
+// Get all Volunteers
+GET http://localhost:5000/volunteers
+
+###
+// Get Single Volunteers
+GET http://localhost:5000/volunteers/332d59d9-b763-48bb-a076-0ad49cab9a55
+
+###
+// Post Data Volunteers
+POST http://localhost:5000/volunteers
+Content-Type: application/json
+
+{
+    "name": "Volunteer alditaher",
+    "price": "00000",
+    "promotor": "Bismillah Sukses",
+    "lokasi": "bandung",
+    "tanggal": "21-12-2023"
+    
+}
+
+
+###
+// Update Data Volunteers
+PATCH http://localhost:5000/volunteers/83f916e2-0a2c-4df1-b112-23c33659ff74
+Content-Type: application/json
+
+{
+    "name": "Volunteer Kolpley 3 hari",
+    "price": "300000",
+    "promotor": "Bismillah mantap",
+    "lokasi": "Batam, Kepulauan Riau",
+    "tanggal": "20-05-2023"
+    
+}
+
+
+###
+// Delete Data Volunteers
+DELETE http://localhost:5000/volunteers/83f916e2-0a2c-4df1-b112-23c33659ff74
