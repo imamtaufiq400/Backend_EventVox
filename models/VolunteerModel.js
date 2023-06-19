@@ -4,8 +4,8 @@ import User from "./UserModel.js";
 
 const { DataTypes } = Sequelize;
 
-const Events = db.define(
-  "Event",
+const Volunteers = db.define(
+  "Volunteer",
   {
     uuid: {
       type: DataTypes.STRING,
@@ -64,7 +64,7 @@ const Events = db.define(
   }
 );
 
-User.hasMany(Events);
-Events.belongsTo(User, { foreignKey: "userId" });
+User.hasMany(Volunteers);
+Volunteers.belongsTo(User, { foreignKey: "userId" });
 
-export default Events;
+export default Volunteers;
