@@ -7,6 +7,7 @@ export const Login = async (req, res) => {
       email: req.body.email,
     },
   });
+  // console.log(req.body.email);
   if (!user) return res.status(404).json({ msg: "User tidak ditemukan" });
   const match = await argon2.verify(user.password, req.body.password);
   if (!match) return res.status(400).json({ msg: "Password Anda Salah" });
@@ -16,7 +17,7 @@ export const Login = async (req, res) => {
   const name = user.name;
   const email = user.email;
   const role = user.role;
-  res.status(200).json({ uuid, name, email, role });
+  res.status(200).json({ Msg: "Anda telah berhasil login. Halo", name, role });
 };
 
 export const Me = async (req, res) => {

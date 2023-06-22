@@ -27,7 +27,8 @@ export const getUsersById = async (req, res) => {
 };
 
 export const createUsers = async (req, res) => {
-  const { name, username, email, password, confPassword, role } = req.body;
+  const { name, username, nomorTelepon, email, password, confPassword, role } =
+    req.body;
   if (password !== confPassword)
     return res
       .status(400)
@@ -37,6 +38,7 @@ export const createUsers = async (req, res) => {
     await User.create({
       name: name,
       username: username,
+      nomorTelepon: nomorTelepon,
       email: email,
       password: hashPassword,
       role: role,

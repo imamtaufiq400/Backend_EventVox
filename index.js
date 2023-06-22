@@ -8,6 +8,7 @@ import UserRoute from "./Routes/UserRoute.js";
 import EventRoute from "./Routes/EventRoute.js";
 import AuthRoute from "./Routes/AuthRoute.js";
 import VolunteerRoute from "./Routes/VolunteerRoute.js";
+import TicketEventRoute from "./Routes/TicketEventRoute.js";
 dotenv.config();
 
 const app = express();
@@ -36,7 +37,7 @@ app.use(
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3000",
+    origin: "http://localhost:5173",
   })
 );
 app.use(express.json());
@@ -44,6 +45,7 @@ app.use(UserRoute);
 app.use(EventRoute);
 app.use(AuthRoute);
 app.use(VolunteerRoute);
+app.use(TicketEventRoute);
 
 // store.sync();
 

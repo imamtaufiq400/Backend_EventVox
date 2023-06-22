@@ -7,7 +7,15 @@ export const getEvents = async (req, res) => {
     let response;
     if (req.role === "admin") {
       response = await Events.findAll({
-        attributes: ["uuid", "name", "price", "promotor", "lokasi", "tanggal"],
+        attributes: [
+          "uuid",
+          "name",
+          "price",
+          "promotor",
+          "lokasi",
+          "tanggal",
+          "quantity",
+        ],
         include: [
           {
             model: User,
@@ -17,7 +25,15 @@ export const getEvents = async (req, res) => {
       });
     } else {
       response = await Events.findAll({
-        attributes: ["uuid", "name", "price", "promotor", "lokasi", "tanggal"],
+        attributes: [
+          "uuid",
+          "name",
+          "price",
+          "promotor",
+          "lokasi",
+          "tanggal",
+          "quantity",
+        ],
         where: {
           userId: req.session.me,
         },
@@ -46,7 +62,15 @@ export const getEventsById = async (req, res) => {
     let response;
     if (req.role === "admin") {
       response = await Events.findOne({
-        attributes: ["uuid", "name", "price", "promotor", "lokasi", "tanggal"],
+        attributes: [
+          "uuid",
+          "name",
+          "price",
+          "promotor",
+          "lokasi",
+          "tanggal",
+          "quantity",
+        ],
         where: {
           uuid: Event.uuid,
         },
@@ -59,7 +83,15 @@ export const getEventsById = async (req, res) => {
       });
     } else {
       response = await Events.findOne({
-        attributes: ["uuid", "name", "price", "promotor", "lokasi", "tanggal"],
+        attributes: [
+          "uuid",
+          "name",
+          "price",
+          "promotor",
+          "lokasi",
+          "tanggal",
+          "quantity",
+        ],
         where: {
           [Op.and]: [{ uuid: Event.uuid }, { userId: req.userId }],
         },
@@ -79,7 +111,7 @@ export const getEventsById = async (req, res) => {
 };
 
 export const createEvent = async (req, res) => {
-  const { name, price, promotor, lokasi, tanggal } = req.body;
+  const { name, price, promotor, lokasi, tanggal, quantity } = req.body;
   try {
     await Events.create({
       name: name,
@@ -87,6 +119,7 @@ export const createEvent = async (req, res) => {
       promotor: promotor,
       lokasi: lokasi,
       tanggal: tanggal,
+      quantity: quantity,
       userId: req.userId,
     });
     res.status(201).json({ msg: "Event telah sukses dibuat" });
@@ -106,7 +139,7 @@ export const updateEvent = async (req, res) => {
     const { name, price, promotor, lokasi, tanggal } = req.body;
     if (req.role === "admin") {
       await Events.update(
-        { name, price, promotor, lokasi, tanggal },
+        { name, price, promotor, lokasi, tanggal, quantity },
         {
           where: {
             uuid: Event.uuid,
@@ -117,7 +150,7 @@ export const updateEvent = async (req, res) => {
       if (req.userId !== Event.userId)
         return res.status(403).json({ msg: "Akses Terlarang" });
       await Events.update(
-        { name, price, promotor, lokasi, tanggal },
+        { name, price, promotor, lokasi, tanggal, quantity },
         {
           where: {
             [Op.and]: [{ uuid: Event.uuid }, { userId: req.userId }],

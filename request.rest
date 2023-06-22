@@ -3,9 +3,10 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "nama_lengkap": "fathur rohman",
-    "username": "fathur",
+    "name": "fathur rohman 123",
+    "username": "fathur 123",
     "email": "fathurrohman123@gmail.com",
+    "nomorTelepon": "08123456789",
     "password": "123456",
     "confPassword": "123456",
     "role": "user"
@@ -71,7 +72,7 @@ GET http://localhost:5000/events
 
 ###
 // Get Single Events
-GET http://localhost:5000/events/f1532fe1-7db1-4f63-8f84-7d65cce80542
+GET http://localhost:5000/events/b03e1a1c-3665-4f47-9439-ac8d17a146c2
 
 
 ###
@@ -80,17 +81,18 @@ POST http://localhost:5000/events
 Content-Type: application/json
 
 {
-    "name": "Event Konser alditaher",
-    "price": "15000",
-    "promotor": "YangMauMauAja",
-    "lokasi": "bandung",
-    "tanggal": "21-12-2024"
+    "name": "Event Konser For Revenge",
+    "price": "10000",
+    "promotor": "JadiinAjaDulu",
+    "lokasi": "batam",
+    "tanggal": "21-12-2024",
+    "quantity": "1000"
     
 }
 
 ###
 // Update Data Events
-PATCH http://localhost:5000/events/7cc40917-b8a3-407a-aa65-2689c20129ce
+PATCH http://localhost:5000/events/b03e1a1c-3665-4f47-9439-ac8d17a146c2
 Content-Type: application/json
 
 {
@@ -148,3 +150,43 @@ Content-Type: application/json
 ###
 // Delete Data Volunteers
 DELETE http://localhost:5000/volunteers/83f916e2-0a2c-4df1-b112-23c33659ff74
+
+
+###
+// Get all Ticket
+GET http://localhost:5000/ticket
+Content-Type: application/json
+
+
+###
+// Get Single Ticket
+GET http://localhost:5000/events/7cc40917-b8a3-407a-aa65-2689c20129ce/ticket/62ce447b-fe7a-480a-8922-b84cd3b0e178
+Content-Type: application/json
+
+
+###
+// create Ticket
+POST  http://localhost:5000/events/7cc40917-b8a3-407a-aa65-2689c20129ce/ticket
+Content-Type: application/json
+
+{
+    "number": "6"
+    
+}
+
+###
+// create Ticket
+PATCH   http://localhost:5000/events/7cc40917-b8a3-407a-aa65-2689c20129ce/ticket/62ce447b-fe7a-480a-8922-b84cd3b0e178
+Content-Type: application/json
+
+{
+    "number": "5"
+    
+}
+
+
+
+###
+// Delete Ticket
+DELETE   http://localhost:5000/events/7cc40917-b8a3-407a-aa65-2689c20129ce/ticket/62ce447b-fe7a-480a-8922-b84cd3b0e178
+Content-Type: application/json

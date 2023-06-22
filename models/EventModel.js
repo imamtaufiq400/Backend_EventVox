@@ -51,6 +51,13 @@ const Events = db.define(
         notEmpty: true,
       },
     },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,

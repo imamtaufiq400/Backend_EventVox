@@ -1,10 +1,12 @@
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
+import Events from "./EventModel.js";
+import User from "./UserModel.js";
 
 const { DataTypes } = Sequelize;
 
-const User = db.define(
-  "users",
+const Ticket = db.define(
+  "ticket",
   {
     uuid: {
       type: DataTypes.STRING,
@@ -14,47 +16,37 @@ const User = db.define(
         notEmpty: true,
       },
     },
-    name: {
+    number: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true,
-        len: [3, 100],
       },
     },
-    username: {
+
+    eventName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true,
-        len: [3, 100],
       },
     },
-    nomorTelepon: {
+    eventLokasi: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    eventTanggal: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: true,
-        len: [3, 100],
       },
     },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-        isEmail: true,
-      },
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
-    },
-    role: {
-      type: DataTypes.STRING,
+    userId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: true,
@@ -66,4 +58,7 @@ const User = db.define(
   }
 );
 
-export default User;
+Events.hasMany(Ticket);
+Ticket.belongsTo(User, { foreignKey: "userId" });
+
+export default Ticket;
