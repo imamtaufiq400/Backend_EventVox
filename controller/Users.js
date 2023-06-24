@@ -56,6 +56,9 @@ export const updateUsers = async (req, res) => {
     },
   });
   if (!user) return res.status(404).json({ msg: "User tidak ditemukan" });
+  if (user.uuid !== req.session.userId)
+    return res.status(403).json({ msg: "Akses Terlarang" });
+  console.log(req.session.userId);
   const { name, username, email, password, confPassword, role } = req.body;
   let hashPassword;
   if (password === "" || password === null) {

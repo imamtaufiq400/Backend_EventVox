@@ -7,7 +7,17 @@ export const getVolunteers = async (req, res) => {
     let response;
     if (req.role === "admin") {
       response = await Volunteers.findAll({
-        attributes: ["uuid", "name", "price", "promotor", "lokasi", "tanggal"],
+        attributes: [
+          "uuid",
+          "name",
+          "promotor",
+          "jeniskegiatan",
+          "lokasi",
+          "linkmaplokasi",
+          "tanggal",
+          "quantity",
+          "deskripsi",
+        ],
         include: [
           {
             model: User,
@@ -17,7 +27,17 @@ export const getVolunteers = async (req, res) => {
       });
     } else {
       response = await Volunteers.findAll({
-        attributes: ["uuid", "name", "price", "promotor", "lokasi", "tanggal"],
+        attributes: [
+          "uuid",
+          "name",
+          "promotor",
+          "jeniskegiatan",
+          "lokasi",
+          "linkmaplokasi",
+          "tanggal",
+          "quantity",
+          "deskripsi",
+        ],
         where: {
           userId: req.session.me,
         },
@@ -47,7 +67,17 @@ export const getVolunteersById = async (req, res) => {
     let response;
     if (req.role === "admin") {
       response = await Volunteers.findOne({
-        attributes: ["uuid", "name", "price", "promotor", "lokasi", "tanggal"],
+        attributes: [
+          "uuid",
+          "name",
+          "promotor",
+          "jeniskegiatan",
+          "lokasi",
+          "linkmaplokasi",
+          "tanggal",
+          "quantity",
+          "deskripsi",
+        ],
         where: {
           uuid: Volunteer.uuid,
         },
@@ -60,7 +90,17 @@ export const getVolunteersById = async (req, res) => {
       });
     } else {
       response = await Volunteers.findOne({
-        attributes: ["uuid", "name", "price", "promotor", "lokasi", "tanggal"],
+        attributes: [
+          "uuid",
+          "name",
+          "promotor",
+          "jeniskegiatan",
+          "lokasi",
+          "linkmaplokasi",
+          "tanggal",
+          "quantity",
+          "deskripsi",
+        ],
         where: {
           [Op.and]: [{ uuid: Volunteer.uuid }, { userId: req.userId }],
         },
@@ -80,14 +120,38 @@ export const getVolunteersById = async (req, res) => {
 };
 
 export const createVolunteers = async (req, res) => {
-  const { name, price, promotor, lokasi, tanggal } = req.body;
+  if (req.file === undefined) {
+    return res.status(400).json({ msg: "Tidak ada file yang di upload" });
+  }
+  const { originalname: gambar, size } = req.file;
+  const {
+    name,
+    promotor,
+    jeniskegiatan,
+    lokasi,
+    linkmaplokasi,
+    tanggal,
+    quantity,
+    deskripsi,
+  } = req.body;
+  const fileSize = size;
+  const imageUrl = `${process.cwd()}\\images\\${gambar}`;
+  if (fileSize > 5000000) {
+    return res
+      .status(422)
+      .json({ msg: "Gambar harus berukuran kurang dari 5MB" });
+  }
   try {
     await Volunteers.create({
       name: name,
-      price: price,
+      gambar: gambar,
+      jeniskegiatan: jeniskegiatan,
       promotor: promotor,
       lokasi: lokasi,
+      linkmaplokasi: linkmaplokasi,
       tanggal: tanggal,
+      quantity: quantity,
+      deskripsi: deskripsi,
       userId: req.userId,
     });
     res.status(201).json({ msg: "Recruitment Volunteer telah sukses dibuat" });
@@ -105,10 +169,28 @@ export const updateVolunteers = async (req, res) => {
     });
     if (!Volunteer)
       return res.status(404).json({ msg: "Data tidak Ditemukan" });
-    const { name, price, promotor, lokasi, tanggal } = req.body;
+    const {
+      name,
+      promotor,
+      jeniskegiatan,
+      lokasi,
+      linkmaplokasi,
+      tanggal,
+      quantity,
+      deskripsi,
+    } = req.body;
     if (req.role === "admin") {
       await Volunteers.update(
-        { name, price, promotor, lokasi, tanggal },
+        {
+          name,
+          promotor,
+          jeniskegiatan,
+          lokasi,
+          linkmaplokasi,
+          tanggal,
+          quantity,
+          deskripsi,
+        },
         {
           where: {
             uuid: Volunteer.uuid,
@@ -119,7 +201,16 @@ export const updateVolunteers = async (req, res) => {
       if (req.userId !== Volunteer.userId)
         return res.status(403).json({ msg: "Akses Terlarang" });
       await Volunteers.update(
-        { name, price, promotor, lokasi, tanggal },
+        {
+          name,
+          promotor,
+          jeniskegiatan,
+          lokasi,
+          linkmaplokasi,
+          tanggal,
+          quantity,
+          deskripsi,
+        },
         {
           where: {
             [Op.and]: [{ uuid: Volunteer.uuid }, { userId: req.userId }],

@@ -9,7 +9,7 @@ Content-Type: application/json
     "nomorTelepon": "08123456789",
     "password": "123456",
     "confPassword": "123456",
-    "role": "user"
+    "role": "promotor"
 }
 
 

@@ -23,8 +23,8 @@ const Volunteers = db.define(
         len: [3, 100],
       },
     },
-    price: {
-      type: DataTypes.INTEGER,
+    jeniskegiatan: {
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true,
@@ -44,7 +44,35 @@ const Volunteers = db.define(
         notEmpty: true,
       },
     },
+    linkmaplokasi: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
     tanggal: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    quantity: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    deskripsi: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    gambar: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {

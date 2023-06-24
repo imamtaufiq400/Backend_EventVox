@@ -23,6 +23,13 @@ const Events = db.define(
         len: [3, 100],
       },
     },
+    gambar: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
     price: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -37,7 +44,21 @@ const Events = db.define(
         notEmpty: true,
       },
     },
+    jenisevent: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
     lokasi: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    linkmaplokasi: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -53,6 +74,13 @@ const Events = db.define(
     },
     quantity: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    deskripsi: {
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true,

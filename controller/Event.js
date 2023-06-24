@@ -12,9 +12,12 @@ export const getEvents = async (req, res) => {
           "name",
           "price",
           "promotor",
+          "jenisevent",
           "lokasi",
+          "linkmaplokasi",
           "tanggal",
           "quantity",
+          "deskripsi",
         ],
         include: [
           {
@@ -30,9 +33,12 @@ export const getEvents = async (req, res) => {
           "name",
           "price",
           "promotor",
+          "jenisevent",
           "lokasi",
+          "linkmaplokasi",
           "tanggal",
           "quantity",
+          "deskripsi",
         ],
         where: {
           userId: req.session.me,
@@ -64,12 +70,16 @@ export const getEventsById = async (req, res) => {
       response = await Events.findOne({
         attributes: [
           "uuid",
+          "uuid",
           "name",
           "price",
           "promotor",
+          "jenisevent",
           "lokasi",
+          "linkmaplokasi",
           "tanggal",
           "quantity",
+          "deskripsi",
         ],
         where: {
           uuid: Event.uuid,
@@ -88,9 +98,12 @@ export const getEventsById = async (req, res) => {
           "name",
           "price",
           "promotor",
+          "jenisevent",
           "lokasi",
+          "linkmaplokasi",
           "tanggal",
           "quantity",
+          "deskripsi",
         ],
         where: {
           [Op.and]: [{ uuid: Event.uuid }, { userId: req.userId }],
@@ -111,15 +124,41 @@ export const getEventsById = async (req, res) => {
 };
 
 export const createEvent = async (req, res) => {
-  const { name, price, promotor, lokasi, tanggal, quantity } = req.body;
+  if (req.file === undefined) {
+    return res.status(400).json({ msg: "Tidak ada file yang di upload" });
+  }
+  const { originalname: gambar, size } = req.file;
+  const {
+    name,
+    price,
+    promotor,
+    jenisevent,
+    lokasi,
+    linkmaplokasi,
+    tanggal,
+    quantity,
+    deskripsi,
+  } = req.body;
+  const fileSize = size;
+  const imageUrl = `${process.cwd()}\\images\\${gambar}`;
+  if (fileSize > 5000000) {
+    return res
+      .status(422)
+      .json({ msg: "Gambar harus berukuran kurang dari 5MB" });
+  }
+
   try {
     await Events.create({
       name: name,
+      gambar: gambar,
       price: price,
       promotor: promotor,
+      jenisevent: jenisevent,
       lokasi: lokasi,
+      linkmaplokasi: linkmaplokasi,
       tanggal: tanggal,
       quantity: quantity,
+      deskripsi: deskripsi,
       userId: req.userId,
     });
     res.status(201).json({ msg: "Event telah sukses dibuat" });
@@ -136,10 +175,30 @@ export const updateEvent = async (req, res) => {
       },
     });
     if (!Event) return res.status(404).json({ msg: "Data tidak Ditemukan" });
-    const { name, price, promotor, lokasi, tanggal } = req.body;
+    const {
+      name,
+      price,
+      promotor,
+      jenisevent,
+      lokasi,
+      linkmaplokasi,
+      tanggal,
+      quantity,
+      deskripsi,
+    } = req.body;
     if (req.role === "admin") {
       await Events.update(
-        { name, price, promotor, lokasi, tanggal, quantity },
+        {
+          name,
+          price,
+          promotor,
+          jenisevent,
+          lokasi,
+          linkmaplokasi,
+          tanggal,
+          quantity,
+          deskripsi,
+        },
         {
           where: {
             uuid: Event.uuid,
@@ -150,7 +209,17 @@ export const updateEvent = async (req, res) => {
       if (req.userId !== Event.userId)
         return res.status(403).json({ msg: "Akses Terlarang" });
       await Events.update(
-        { name, price, promotor, lokasi, tanggal, quantity },
+        {
+          name,
+          price,
+          promotor,
+          jenisevent,
+          lokasi,
+          linkmaplokasi,
+          tanggal,
+          quantity,
+          deskripsi,
+        },
         {
           where: {
             [Op.and]: [{ uuid: Event.uuid }, { userId: req.userId }],
