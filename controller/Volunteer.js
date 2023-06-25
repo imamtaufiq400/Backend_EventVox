@@ -167,6 +167,9 @@ export const updateVolunteers = async (req, res) => {
         uuid: req.params.id,
       },
     });
+    const user = await User.findOne({
+      where: { uuid: req.session.userId },
+    });
     if (!Volunteer)
       return res.status(404).json({ msg: "Data tidak Ditemukan" });
     const {
@@ -179,7 +182,7 @@ export const updateVolunteers = async (req, res) => {
       quantity,
       deskripsi,
     } = req.body;
-    if (req.role === "admin") {
+    if (user.role === "admin") {
       await Volunteers.update(
         {
           name,
@@ -232,9 +235,12 @@ export const deleteVolunteers = async (req, res) => {
         uuid: req.params.id,
       },
     });
+    const user = await User.findOne({
+      where: { uuid: req.session.userId },
+    });
     if (!Volunteer)
       return res.status(404).json({ msg: "Data tidak Ditemukan" });
-    if (req.role === "admin") {
+    if (user.role === "admin") {
       await Volunteers.destroy({
         where: {
           uuid: Volunteer.uuid,

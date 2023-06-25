@@ -22,12 +22,12 @@ GET http://localhost:5000/users
 GET http://localhost:5000/users/c749b3b0-c7d5-4c20-ac0b-4cc363da9cb3
 ###
 // Update User
-PATCH  http://localhost:5000/users/c749b3b0-c7d5-4c20-ac0b-4cc363da9cb3
+PATCH  http://localhost:5000/users/6fd22e07-9812-4da2-b0ac-0325fa6140d3
 Content-Type: application/json
 
 {
-    "name": "Makmum versi dua",
-    "email": "makmum@gmail.com",
+    "name": "Makmum versi lima",
+    "email": "makmum123@gmail.com",
     "password": "",
     "confPassword": "",
     "role": "user"
@@ -53,7 +53,7 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "email": "fathurrohman123@gmail.com",
+    "email": "makmum123@gmail.com",
     "password": "123456"
     
 }
@@ -72,7 +72,7 @@ GET http://localhost:5000/events
 
 ###
 // Get Single Events
-GET http://localhost:5000/events/b03e1a1c-3665-4f47-9439-ac8d17a146c2
+GET http://localhost:5000/events/5c1110dc-492e-4520-bdc2-2037b5f1a16f
 
 
 ###
@@ -81,7 +81,7 @@ POST http://localhost:5000/events
 Content-Type: application/json
 
 {
-    "name": "Event Konser For Revenge",
+    "name": "Event Konser For Revenge 2024",
     "price": "10000",
     "promotor": "JadiinAjaDulu",
     "lokasi": "batam",
@@ -160,27 +160,24 @@ Content-Type: application/json
 
 ###
 // Get Single Ticket
-GET http://localhost:5000/events/7cc40917-b8a3-407a-aa65-2689c20129ce/ticket/62ce447b-fe7a-480a-8922-b84cd3b0e178
+GET http://localhost:5000/ticket/7de98d90-30a0-45c0-bb5b-ca5c2d9b4dc8
 Content-Type: application/json
 
 
 ###
 // create Ticket
-POST  http://localhost:5000/events/7cc40917-b8a3-407a-aa65-2689c20129ce/ticket
+POST  http://localhost:5000/events/7cc40917-b8a3-407a-aa65-2689c20129ce/pemesanan/88994/ticket
 Content-Type: application/json
 
-{
-    "number": "6"
-    
-}
 
 ###
-// create Ticket
-PATCH   http://localhost:5000/events/7cc40917-b8a3-407a-aa65-2689c20129ce/ticket/62ce447b-fe7a-480a-8922-b84cd3b0e178
+// update Ticket
+PATCH   http://localhost:5000/events/7cc40917-b8a3-407a-aa65-2689c20129ce/pemesanan/88994/ticket/7de98d90-30a0-45c0-bb5b-ca5c2d9b4dc8
+
 Content-Type: application/json
 
 {
-    "number": "5"
+    "jumlahTicket": "5"
     
 }
 
@@ -188,5 +185,40 @@ Content-Type: application/json
 
 ###
 // Delete Ticket
-DELETE   http://localhost:5000/events/7cc40917-b8a3-407a-aa65-2689c20129ce/ticket/62ce447b-fe7a-480a-8922-b84cd3b0e178
+DELETE   http://localhost:5000/events/7cc40917-b8a3-407a-aa65-2689c20129ce/ticket/7de98d90-30a0-45c0-bb5b-ca5c2d9b4dc8
+Content-Type: application/json
+
+
+
+###
+// Get all pemesanan
+GET http://localhost:5000/pemesanan
+Content-Type: application/json
+
+###
+// Get Single pemesanan
+GET http://localhost:5000/pemesanan/88993
+Content-Type: application/json
+
+###
+// create Pemesanan
+POST  http://localhost:5000/events/7cc40917-b8a3-407a-aa65-2689c20129ce/pemesanan
+Content-Type: application/json
+
+{
+    "jumlahTicket": "3"
+}
+
+###
+// Update Pemesanan
+PATCH  http://localhost:5000/pemesanan/88994
+Content-Type: application/json
+
+{
+    "jumlahTicket": "6"
+}
+
+###
+// Delete Pemesanan
+DELETE   http://localhost:5000/pemesanan/88994
 Content-Type: application/json

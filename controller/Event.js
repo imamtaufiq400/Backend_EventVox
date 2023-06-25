@@ -174,6 +174,9 @@ export const updateEvent = async (req, res) => {
         uuid: req.params.id,
       },
     });
+    const user = await User.findOne({
+      where: { uuid: req.session.userId },
+    });
     if (!Event) return res.status(404).json({ msg: "Data tidak Ditemukan" });
     const {
       name,
@@ -186,7 +189,7 @@ export const updateEvent = async (req, res) => {
       quantity,
       deskripsi,
     } = req.body;
-    if (req.role === "admin") {
+    if (user.role === "admin") {
       await Events.update(
         {
           name,
@@ -205,6 +208,8 @@ export const updateEvent = async (req, res) => {
           },
         }
       );
+      console.log(req.role);
+      return res.status(200).json({ msg: "Event Berhasil di Update" });
     } else {
       if (req.userId !== Event.userId)
         return res.status(403).json({ msg: "Akses Terlarang" });
@@ -227,7 +232,7 @@ export const updateEvent = async (req, res) => {
         }
       );
     }
-    res.status(200).json({ msg: "Event Berhasil di Update" });
+    return res.status(200).json({ msg: "Event Berhasil di Update" });
   } catch (error) {
     // console.log(error);
     res.status(500).json({ msg: error.message });
@@ -241,8 +246,11 @@ export const deleteEvent = async (req, res) => {
         uuid: req.params.id,
       },
     });
+    const user = await User.findOne({
+      where: { uuid: req.session.userId },
+    });
     if (!Event) return res.status(404).json({ msg: "Data tidak Ditemukan" });
-    if (req.role === "admin") {
+    if (user.role === "admin") {
       await Events.destroy({
         where: {
           uuid: Event.uuid,

@@ -2,6 +2,7 @@ import { Sequelize } from "sequelize";
 import db from "../config/database.js";
 import Events from "./EventModel.js";
 import User from "./UserModel.js";
+import Pemesanan from "./PemesananModel.js";
 
 const { DataTypes } = Sequelize;
 
@@ -16,14 +17,20 @@ const Ticket = db.define(
         notEmpty: true,
       },
     },
-    number: {
-      type: DataTypes.STRING,
+    kodePemesanan: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
-
+    jumlahTicket: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
     eventName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -39,6 +46,13 @@ const Ticket = db.define(
       },
     },
     eventTanggal: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    eventId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
@@ -46,6 +60,27 @@ const Ticket = db.define(
       },
     },
     userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    userName: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    userEmail: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    userNomorTelepon: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
@@ -60,5 +95,7 @@ const Ticket = db.define(
 
 Events.hasMany(Ticket);
 Ticket.belongsTo(User, { foreignKey: "userId" });
+Ticket.belongsTo(Events, { foreignKey: "eventId" });
+Ticket.belongsTo(Pemesanan, { foreignKey: "kodePemesanan, jumlahTicket" });
 
 export default Ticket;
