@@ -10,6 +10,7 @@ import AuthRoute from "./Routes/AuthRoute.js";
 import VolunteerRoute from "./Routes/VolunteerRoute.js";
 import TicketEventRoute from "./Routes/TicketEventRoute.js";
 import PemesananRoute from "./Routes/PemesananRoute.js";
+import JoinVoluteerRoute from "./Routes/JoinVolunteerRoute.js";
 dotenv.config();
 
 const app = express();
@@ -48,6 +49,7 @@ app.use(AuthRoute);
 app.use(VolunteerRoute);
 app.use(TicketEventRoute);
 app.use(PemesananRoute);
+app.use(JoinVoluteerRoute);
 
 // store.sync();
 

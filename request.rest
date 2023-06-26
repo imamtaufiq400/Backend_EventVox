@@ -3,13 +3,13 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "name": "fathur rohman 123",
-    "username": "fathur 123",
-    "email": "fathurrohman123@gmail.com",
+    "name": "fiqih",
+    "username": "fiqih fadillah",
+    "email": "fiqihfadillah@gmail.com",
     "nomorTelepon": "08123456789",
     "password": "123456",
     "confPassword": "123456",
-    "role": "promotor"
+    "role": "user"
 }
 
 
@@ -221,4 +221,51 @@ Content-Type: application/json
 ###
 // Delete Pemesanan
 DELETE   http://localhost:5000/pemesanan/88994
+Content-Type: application/json
+
+
+
+###
+// get all Join Volunteers
+GET   http://localhost:5000/joinvolunteer
+Content-Type: application/json
+
+###
+// get all Join Volunteers
+GET   http://localhost:5000/joinvolunteer/dfcb73f0-311c-4674-9cbd-9e5b4efcc62e
+Content-Type: application/json
+
+###
+// create Join Volunteers
+POST  http://localhost:5000/joinvolunteer
+Content-Type: application/json
+
+{
+    "namaLengkap": "sueb",
+    "jenisKelamin": "laki-laki",
+    "umur": "21",
+    "email": "sueb@gmail.com",
+    "nomorTelepon": "0812345678",
+    "alamatLengkap": "Batam Centre",
+    "divisi": "media"
+}
+
+###
+// update Join Volunteers
+PATCH    http://localhost:5000/joinvolunteer/dfcb73f0-311c-4674-9cbd-9e5b4efcc62e
+Content-Type: application/json
+
+{
+    "namaLengkap": "sueb",
+    "jenisKelamin": "laki-laki",
+    "umur": "21",
+    "email": "sueb@gmail.com",
+    "nomorTelepon": "0812345678",
+    "alamatLengkap": "Bengkong",
+    "divisi": "media"
+}
+
+###
+// delete Join Volunteers
+DELETE  http://localhost:5000/joinvolunteer/dfcb73f0-311c-4674-9cbd-9e5b4efcc62e
 Content-Type: application/json
